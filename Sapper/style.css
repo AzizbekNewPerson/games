@@ -1,0 +1,77 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+main {
+	background-color: #F0EC73;
+	height: 100vh;
+	padding: 100px 0 0 0;
+}
+.sapper__window {
+	width: 360px;
+	height: 440px;
+	margin: 0 auto;
+}
+.sapper__top {
+	width: 100%;
+	height: 18%;
+	background-color: #DDC35D;
+	padding: 0 20px;
+	display: flex;
+	justify-content: space-evenly;
+	flex-direction: column;
+	font-weight: 600;
+	border-radius: 10px 10px 0 0;
+}
+.sapper__numbers {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+.sapper__control {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+.sapper__score {
+
+}
+.sapper__button-bombNumbers {
+	width: 70px;
+}
+.sapper__button-newGame,
+.sapper__button-startGame,
+.sapper__button-bombNumbers {
+	border: none;
+	border-radius: 5px;
+	padding: 3px 5px;
+	font-weight: 600;
+	color: #000;
+	background-color: #C53B3D; 
+}
+.sapper__field {
+	width: 100%;
+	height: 82%;
+	background-color: #C53B3D;
+	display: grid;
+	grid-template-columns: repeat(9, 1fr);
+	grid-template-rows: repeat(9, 1fr);
+	justify-content: center;
+}
+.sapper__sq {
+	width: 38px;
+	height: 38px;
+	background-color: #86213D;
+	text-align: center;
+	line-height: 38px;
+	font-size: 26px;
+	border-radius: 4px;
+}
+.sapper__sq-back {
+	width: 38px;
+	height: 38px;
+	background-color: #C53B3D;
+	transition: all 1s ease 0s;
+	transform: scale(-1, 1);
+}
