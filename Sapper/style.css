@@ -103,9 +103,6 @@ main {
 }
 
 @media (max-width: 400px) {
-	main {
-		height: 70vh;
-	}
 	.sapper__window {
 		max-width: 360px;
 		height: 100vmin;
