@@ -7,6 +7,7 @@ main {
 	background-color: #F0EC73;
 	height: 100vh;
 	padding: 90px 0;
+	text-align: center;
 }
 .sapper__window {
 	max-width: 360px;
@@ -74,15 +75,28 @@ main {
 	line-height: 38px;
 	font-size: 26px;
 	border-radius: 4px;
-	margin: 0 auto
+	margin: 0 auto;
+	transform: scale(-1, 1);
 }
+
 .sapper__sq-back {
 	width: 90%;
 	height: 90%;
 	background-color: #C53B3D;
-	transition: all 1s ease 0s;
-	transform: scale(-1, 1);
-	margin: 0 auto
+	transition: all 500ms ease 0s;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.sapper__sq-back p {
+
+}
+.sapper__sign {
+	margin: 40px 0 0 0;
+	font-size: 26px;
+	font-weight: 600;
+	color: #86213D;
 }
 
 @media (max-width: 400px) {

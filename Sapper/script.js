@@ -3,7 +3,7 @@ let timer = document.getElementById('timer');
 let start = document.getElementById('startGame');
 let restart = document.getElementById('newGame');
 let el = document.getElementById('numOfBombs');
-let array = [];
+let bombsArray = [];
 let cellsArray = [];
 let seconds = 0;
 let minutes = 0;
@@ -16,7 +16,17 @@ function fillField() {
 		square.setAttribute('id', i);
 		field.appendChild(square);
 	}
+}
+
+function setBombs(numOfBombs) {
+	bombsArray = [];
 	let count = 0;
+	while (bombsArray.length != numOfBombs) {
+		rand = Math.floor(Math.random() * 82);
+		if ( !bombsArray.includes(rand) ) {
+			bombsArray.push(rand);
+		}
+	}
 	for (let i = 0; i < 9; i++) {
 		cellsArray[i] = [];
 		for (let j = 0; j < 9; j++) {
@@ -24,42 +34,38 @@ function fillField() {
 			count++;
 		}
 	}
-	console.log(cellsArray);
-}
-
-function setBombs(numOfBombs) {
-	array = [];
-
-	while (array.length != numOfBombs) {
-		rand = Math.floor(Math.random() * 82);
-		if ( !array.includes(rand) ) {
-			array.push(rand);
-		}
-	}
+	count = 0;
 	for (let i = 0; i < 9; i++) {
 		for (let j = 0; j < 9; j++) {
-			if( array.includes(+cellsArray[i][j].index) ) {
-				console.log('contain');
+			count = 0;
+			if( bombsArray.includes(+cellsArray[i][j].index) ) {
 				continue;
 			}
-			// for(let k = 0; k < 8) {
-
-			// }
-			// cellsArray[i][j] = {'index': count, 'dangerous': 0};
-			// count++;
+			for(let k = i - 1; k < i + 2; k++) {
+				for(let l = j - 1; l < j + 2; l++) {
+					try{
+						if(k == i && l == j){
+							continue;
+						}
+						else if( bombsArray.includes(+cellsArray[k][l].index) ){
+							count++;
+						}
+					}
+					catch(e){};
+				}
+			}
+			cellsArray[i][j].dangerous = +count;
 		}
 	}
-	console.log(array);
 }
 
 function changeClass(e) {
 	let target = e.target;
-	console.log(+target.getAttribute('id'));
 
-	if( array.includes(+target.getAttribute('id')) ){
+	if( bombsArray.includes(+target.getAttribute('id')) ){
 		let cells = document.querySelectorAll('div.sapper__sq-front');
 		for (let value of cells) {
-			if( array.includes(+value.getAttribute('id')) ) {
+			if( bombsArray.includes(+value.getAttribute('id')) ) {
 				let bomb = document.createElement('li');
 				bomb.setAttribute('class', 'fas fa-bomb');
 				value.appendChild(bomb);
@@ -70,26 +76,49 @@ function changeClass(e) {
 	else if(target.className == 'sapper__sq-front') {
 		target.className = 'sapper__sq-back';
 		let id = +target.getAttribute('id');
-		console.log(id);
-		let checkId = [1, 9, 10, -8, -9, -10, 9, 8, -1];
-
-		let start = 0;
-		let end = 9;
-		if ( (id+1) % 9 == 0 ) {
-			start = 4;
-		}
-		else if ( (id) % 9 == 0 ) {
-			end = 5;
-		}
-		for(let i = start; i < end; i++) {
-			if (!array.includes(id + checkId[i])) {
-				let back = document.getElementById(id + checkId[i]);
-				back.className = 'sapper__sq-back';
+		showNumbers(id);
+	}
+}
+function showNumbers(id) {
+	let i = Math.floor(id / 9);
+	let j = id % 9;
+	for(let k = i - 1; k < i + 2; k++) {
+		for(let l = j - 1; l < j + 2; l++) {
+			try{
+				if(k == i && l == j){
+					continue;
+				}
+				else if( !bombsArray.includes(+cellsArray[k][l].index) ){
+					let back = document.getElementById(+cellsArray[k][l].index);
+					if(!back.hasChildNodes() ) {
+						back.className = 'sapper__sq-back';
+						let p = document.createElement('p');
+						try{
+							let text = document.createTextNode(+cellsArray[k][l].dangerous);
+							if( !(+cellsArray[k][l].dangerous == 0) ){
+								p.appendChild(text);
+								p.setAttribute('id',+cellsArray[k][l].index+'a')
+								back.appendChild(p);
+							}
+						}
+						catch(e){};
+					}
+				}
 			}
+			catch(e){
+			};
 		}
 	}
 }
-
+function hideNumbers(){
+	for (let i = 0; i < 81; i++) {
+		let square = document.getElementById(i);
+		if(square.hasChildNodes()) {
+			let p = document.getElementById(i+'a');
+			square.removeChild(p);
+		}
+	}
+}
 function startGame() {
 	if( !parseInt(el.value) ) {
 		alert('Введите корректное количество бомб!');
@@ -108,6 +137,7 @@ function startGame() {
 	}
 
 	setBombs(+el.value);
+	hideNumbers();
 	idInterval = setInterval(updateTimer, 1000);
 	field.addEventListener('click', changeClass, false);
 	start.removeEventListener('click', startGame, false);
@@ -131,6 +161,7 @@ function newGame() {
 	}
 
 	gameStop();
+	hideNumbers();
 	el.focus();
 	start.addEventListener('click', startGame, false);
 }
@@ -148,6 +179,6 @@ function updateTimer() {
 	timer.textContent = 'Time: ' + time;
 }
 
-document.addEventListener("DOMContentLoaded", newGame);
 document.addEventListener("DOMContentLoaded", fillField);
+document.addEventListener("DOMContentLoaded", newGame);
 restart.addEventListener('click', newGame, false);
