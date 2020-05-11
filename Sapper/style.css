@@ -3,9 +3,6 @@
 	margin: 0;
 	box-sizing: border-box;
 }
-body {
-	overflow-y: hidden;
-}
 main {
 	background-color: #F0EC73;
 	height: 100vh;
