@@ -90,5 +90,11 @@ main {
 		max-width: 360px;
 		height: 100vmin;
 	}
+	.sapper__sq-front {
+		line-height: 26px;
+		font-size: 24px;
+		border-radius: 4px;
+		margin: 0 auto
+	}
 
 }
