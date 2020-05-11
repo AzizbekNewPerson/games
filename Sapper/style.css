@@ -3,15 +3,21 @@
 	margin: 0;
 	box-sizing: border-box;
 }
+body {
+	overflow-y: hidden;
+}
 main {
 	background-color: #F0EC73;
-	height: 100vh;
-	padding: 100px 0 0 0;
+	height: 100%;
+	padding: 90px 0;
 }
 .sapper__window {
-	width: 360px;
+	/*width: 80%;*/
+	max-width: 360px;
 	height: 440px;
 	margin: 0 auto;
+	padding: 0 20px;
+	box-sizing: content-box;
 }
 .sapper__top {
 	width: 100%;
@@ -38,7 +44,7 @@ main {
 
 }
 .sapper__button-bombNumbers {
-	width: 70px;
+	width: 81px;
 }
 .sapper__button-newGame,
 .sapper__button-startGame,
@@ -50,6 +56,9 @@ main {
 	color: #000;
 	background-color: #C53B3D; 
 }
+.sapper__button-bombNumbers {
+
+}
 .sapper__field {
 	width: 100%;
 	height: 82%;
@@ -58,20 +67,32 @@ main {
 	grid-template-columns: repeat(9, 1fr);
 	grid-template-rows: repeat(9, 1fr);
 	justify-content: center;
+	align-items: center;
+	padding: 3px;
 }
-.sapper__sq {
-	width: 38px;
-	height: 38px;
+.sapper__sq-front {
+	width: 90%;
+	height: 90%;
 	background-color: #86213D;
 	text-align: center;
 	line-height: 38px;
 	font-size: 26px;
 	border-radius: 4px;
+	margin: 0 auto
 }
 .sapper__sq-back {
-	width: 38px;
-	height: 38px;
+	width: 90%;
+	height: 90%;
 	background-color: #C53B3D;
 	transition: all 1s ease 0s;
 	transform: scale(-1, 1);
+	margin: 0 auto
+}
+
+@media (max-width: 400px) {
+	.sapper__window {
+		max-width: 360px;
+		height: 100vmin;
+	}
+
 }

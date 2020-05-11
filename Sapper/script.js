@@ -4,15 +4,27 @@ let start = document.getElementById('startGame');
 let restart = document.getElementById('newGame');
 let el = document.getElementById('numOfBombs');
 let array = [];
+let cellsArray = [];
 let seconds = 0;
 let minutes = 0;
 let idInterval;
 
-for (let i = 0; i < 81; i++) {
-	let square = document.createElement('div');
-	square.setAttribute('class', 'sapper__sq');
-	square.setAttribute('id', i);
-	field.appendChild(square);
+function fillField() {
+	for (let i = 0; i < 81; i++) {
+		let square = document.createElement('div');
+		square.setAttribute('class', 'sapper__sq-front');
+		square.setAttribute('id', i);
+		field.appendChild(square);
+	}
+	let count = 0;
+	for (let i = 0; i < 9; i++) {
+		cellsArray[i] = [];
+		for (let j = 0; j < 9; j++) {
+			cellsArray[i][j] = {'index': count, 'dangerous': 0};
+			count++;
+		}
+	}
+	console.log(cellsArray);
 }
 
 function setBombs(numOfBombs) {
@@ -24,6 +36,19 @@ function setBombs(numOfBombs) {
 			array.push(rand);
 		}
 	}
+	for (let i = 0; i < 9; i++) {
+		for (let j = 0; j < 9; j++) {
+			if( array.includes(+cellsArray[i][j].index) ) {
+				console.log('contain');
+				continue;
+			}
+			// for(let k = 0; k < 8) {
+
+			// }
+			// cellsArray[i][j] = {'index': count, 'dangerous': 0};
+			// count++;
+		}
+	}
 	console.log(array);
 }
 
@@ -32,7 +57,7 @@ function changeClass(e) {
 	console.log(+target.getAttribute('id'));
 
 	if( array.includes(+target.getAttribute('id')) ){
-		let cells = document.querySelectorAll('div.sapper__sq');
+		let cells = document.querySelectorAll('div.sapper__sq-front');
 		for (let value of cells) {
 			if( array.includes(+value.getAttribute('id')) ) {
 				let bomb = document.createElement('li');
@@ -42,14 +67,12 @@ function changeClass(e) {
 			}
 		}
 	}
-	else if(target.className == 'sapper__sq') {
+	else if(target.className == 'sapper__sq-front') {
 		target.className = 'sapper__sq-back';
 		let id = +target.getAttribute('id');
 		console.log(id);
 		let checkId = [1, 9, 10, -8, -9, -10, 9, 8, -1];
-		//-1, -10, -9, 8, 9
-		//1, -8, -9, 9, 10
-		//1, 9, 10, -10, -9, 9, 8, -1
+
 		let start = 0;
 		let end = 9;
 		if ( (id+1) % 9 == 0 ) {
@@ -59,9 +82,9 @@ function changeClass(e) {
 			end = 5;
 		}
 		for(let i = start; i < end; i++) {
-			if (!array.includes(id + checkId[i]) && id + checkId[i] > -1 && id + checkId[i] < 81) {
-				let el = document.getElementById(id + checkId[i]);
-				el.className = 'sapper__sq-back';
+			if (!array.includes(id + checkId[i])) {
+				let back = document.getElementById(id + checkId[i]);
+				back.className = 'sapper__sq-back';
 			}
 		}
 	}
@@ -87,6 +110,7 @@ function startGame() {
 	setBombs(+el.value);
 	idInterval = setInterval(updateTimer, 1000);
 	field.addEventListener('click', changeClass, false);
+	start.removeEventListener('click', startGame, false);
 }
 
 function newGame() {
@@ -95,9 +119,9 @@ function newGame() {
 	numOfBombs.value = '';
 
 	let backs = document.querySelectorAll('div.sapper__sq-back');
-	backs.forEach(element => element.className ='sapper__sq');
+	backs.forEach(element => element.className ='sapper__sq-front');
 
-	let bombs = document.querySelectorAll('div.sapper__sq');
+	let bombs = document.querySelectorAll('div.sapper__sq-front');
 	for (let value of bombs) {
 		let li = document.querySelector('li');
 		if( value.contains(li) ) {
@@ -105,7 +129,10 @@ function newGame() {
 			value.removeChild(li);
 		}
 	}
+
 	gameStop();
+	el.focus();
+	start.addEventListener('click', startGame, false);
 }
 
 function gameStop() {
@@ -121,5 +148,6 @@ function updateTimer() {
 	timer.textContent = 'Time: ' + time;
 }
 
-start.addEventListener('click', startGame, false);
+document.addEventListener("DOMContentLoaded", newGame);
+document.addEventListener("DOMContentLoaded", fillField);
 restart.addEventListener('click', newGame, false);
