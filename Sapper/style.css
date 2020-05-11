@@ -8,11 +8,10 @@ body {
 }
 main {
 	background-color: #F0EC73;
-	height: 100%;
+	height: 100vh;
 	padding: 90px 0;
 }
 .sapper__window {
-	/*width: 80%;*/
 	max-width: 360px;
 	height: 440px;
 	margin: 0 auto;
