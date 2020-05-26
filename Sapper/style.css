@@ -2,7 +2,7 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	overflow-y: hidden;
+	overflow: hidden;
 }
 main {
 	background-color: #F0EC73;
@@ -38,12 +38,6 @@ main {
 	align-items: center;
 	justify-content: space-evenly;
 }
-.sapper__score {
-
-}
-.sapper__button-bombNumbers {
-	width: 81px;
-}
 .sapper__button-newGame,
 .sapper__button-startGame,
 .sapper__button-bombNumbers {
@@ -52,10 +46,10 @@ main {
 	padding: 3px 5px;
 	font-weight: 600;
 	color: #000;
-	background-color: #C53B3D; 
+	background-color: #C53B3D;
 }
 .sapper__button-bombNumbers {
-
+	width: 81px;
 }
 .sapper__field {
 	width: 100%;
@@ -79,7 +73,6 @@ main {
 	margin: 0 auto;
 	transform: scale(-1, 1);
 }
-
 .sapper__sq-back {
 	width: 90%;
 	height: 90%;
@@ -90,16 +83,12 @@ main {
 	justify-content: center;
 	align-items: center;
 }
-.sapper__sq-back p {
-
-}
 .sapper__sign {
 	margin: 40px 0 0 0;
 	font-size: 26px;
 	font-weight: 600;
 	color: #86213D;
 }
-
 @media (max-width: 400px) {
 	.sapper__window {
 		max-width: 360px;
@@ -111,5 +100,4 @@ main {
 		border-radius: 4px;
 		margin: 0 auto
 	}
-
 }
