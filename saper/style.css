@@ -1,0 +1,103 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+main {
+	background-color: #F0EC73;
+	height: 100vh;
+	padding: 90px 0 0 0;
+	text-align: center;
+}
+.sapper__window {
+	max-width: 360px;
+	height: 440px;
+	margin: 0 auto;
+	padding: 0 20px;
+	box-sizing: content-box;
+}
+.sapper__top {
+	width: 100%;
+	height: 18%;
+	background-color: #DDC35D;
+	padding: 0 20px;
+	display: flex;
+	justify-content: space-evenly;
+	flex-direction: column;
+	font-weight: 600;
+	border-radius: 10px 10px 0 0;
+}
+.sapper__numbers {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+.sapper__control {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+.sapper__button-newGame,
+.sapper__button-startGame,
+.sapper__button-bombNumbers {
+	border: none;
+	border-radius: 5px;
+	padding: 3px 5px;
+	font-weight: 600;
+	color: #000;
+	background-color: #C53B3D;
+}
+.sapper__button-bombNumbers {
+	width: 81px;
+}
+.sapper__field {
+	width: 100%;
+	height: 82%;
+	background-color: #C53B3D;
+	display: grid;
+	grid-template-columns: repeat(9, 1fr);
+	grid-template-rows: repeat(9, 1fr);
+	justify-content: center;
+	align-items: center;
+	padding: 3px;
+}
+.sapper__sq-front {
+	width: 90%;
+	height: 90%;
+	background-color: #86213D;
+	text-align: center;
+	line-height: 38px;
+	font-size: 26px;
+	border-radius: 4px;
+	margin: 0 auto;
+	transform: scale(-1, 1);
+}
+.sapper__sq-back {
+	width: 90%;
+	height: 90%;
+	background-color: #C53B3D;
+	transition: all 500ms ease 0s;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.sapper__sign {
+	margin: 40px 0 0 0;
+	font-size: 26px;
+	font-weight: 600;
+	color: #86213D;
+}
+@media (max-width: 400px) {
+	.sapper__window {
+		max-width: 360px;
+		height: 100vmin;
+	}
+	.sapper__sq-front {
+		line-height: 26px;
+		font-size: 24px;
+		border-radius: 4px;
+		margin: 0 auto
+	}
+}
