@@ -14,17 +14,19 @@ function fillField() {
 	for (let i = 0; i < 9; i++) {
 		for (let j = 0; j < 9; j++) {
 			let square = document.createElement('div');
-			square.setAttribute('class', 'sapper__sq-front');
+			square.setAttribute('class', 'saper__sq');
 			square.setAttribute('id', i + '_' + j);
 			field.appendChild(square);
 		}
 	}
-	tiles = document.querySelectorAll('.sapper__sq-front');
+	tiles = document.querySelectorAll('.saper__sq');
 }
 
 function setBombs(numOfBombs) {
 	let count = 0;
 	let pos = 0;
+	bombsArray = [];
+	bombsMap = [];
 
 	while (bombsArray.length != numOfBombs) {
 		rand = Math.floor(Math.random() * 81);
@@ -59,11 +61,8 @@ function setBombs(numOfBombs) {
 function openTile() {
 	if (bombsArray.includes(this.getAttribute('id'))) {
 		for (let bombsItem of bombsArray) {
-			let bomb = document.createElement('li');
-			bomb.setAttribute('class', 'fas fa-bomb');
-
 			let bombCell = document.getElementById(bombsItem);
-			bombCell.appendChild(bomb);
+			bombCell.classList.add('bomb');
 		}
 		gameStop();
 	}
@@ -73,7 +72,7 @@ function openTile() {
 }
 
 function propogateOpening(target) {
-	target.className = 'sapper__sq-back';
+	target.classList.add('saper__sq_back');
 	let id = target.getAttribute('id');
 	let i = +id.substring(0, 1);
 	let j = +id.substring(2, 3);
@@ -90,10 +89,9 @@ function propogateOpening(target) {
 		for (let k = i - 1; k < i + 2; k++) {
 			for (let l = j - 1; l < j + 2; l++) {
 				try {
-					let id = k * 9 + l;
 					let tile = document.getElementById(k + '_' + l);
 
-					if (tile.classList.contains('sapper__sq-back')) {
+					if (tile.classList.contains('saper__sq_back')) {
 						continue;
 					}
 					propogateOpening(tile);
@@ -132,14 +130,14 @@ function newGame() {
 	timer.textContent = 'Time: 00:00';
 	bombsNum.value = '';
 
-	let backs = document.querySelectorAll('div.sapper__sq-back');
-	backs.forEach(element => element.className = 'sapper__sq-front');
-
+	tiles.forEach(item => item.className = 'saper__sq');
 	tiles.forEach(item => item.innerHTML = '');
 
 	gameStop();
 	bombsNum.focus();
 	startBtn.addEventListener('click', startGame, false);
+	console.log('new game');
+
 }
 
 function gameStop() {
