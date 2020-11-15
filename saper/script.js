@@ -69,6 +69,18 @@ function openTile() {
 	else {
 		propogateOpening(this);
 	}
+
+	let count = document.querySelectorAll('.saper__sq_back');
+
+	if (count.length === (81 - bombsNum.value)) {
+		for (let bombsItem of bombsArray) {
+			let bombCell = document.getElementById(bombsItem);
+			bombCell.classList.add('bomb');
+		}
+		let time = timer.textContent.slice(-5);
+		alert('Победа! Вы справились за ' + time);
+		gameStop();
+	}
 }
 
 function propogateOpening(target) {
@@ -136,8 +148,6 @@ function newGame() {
 	gameStop();
 	bombsNum.focus();
 	startBtn.addEventListener('click', startGame, false);
-	console.log('new game');
-
 }
 
 function gameStop() {
