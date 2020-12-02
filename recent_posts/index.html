@@ -15,7 +15,11 @@
 <script src="instafeed.min.js"></script>
 <script type="text/javascript">
     var feed = new Instafeed({
-        accessToken: "IGQVJWUWtHQlRmWWQ3ZAUxoRlFjVVdVYlF4TkhzaUpJQWpNSXBNa2RBZAlZAfdlpnWjJHVGsxY3BhMjh0M2F1R2lYYTFLZA0JnY2tQdkd3MFNpQjJJWUNnUXlTZA09YMDRiVm4xTzExNk1semRKRE9FcTYtbQZDZD"
+        userId: '17841404174893414',
+        accessToken: "IGQVJWUWtHQlRmWWQ3ZAUxoRlFjVVdVYlF4TkhzaUpJQWpNSXBNa2RBZAlZAfdlpnWjJHVGsxY3BhMjh0M2F1R2lYYTFLZA0JnY2tQdkd3MFNpQjJJWUNnUXlTZA09YMDRiVm4xTzExNk1semRKRE9FcTYtbQZDZD",
+        template: '<div class="columns small-6 medium-4 large-3"><div class="instagram-image-wraper"><a class="test" href="{{link}}"><img src="{{image}}" /></a></div></div>',
+        resolution: 'low_resolution',
+        limit: 12,
     });
     feed.run();
 </script>
